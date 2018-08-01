@@ -1,0 +1,19 @@
+{% load i18n %}
+
+{% if perms.popular_categories.view %}
+<li class="side-nav-section">
+  <p>
+    {% trans "Popular Categories" context "Dashboard popular categories list" %}
+  </p>
+  <ul>
+      {% if perms.popular_categories.vew %}
+        <li class="{% block menu_popular_categories_class %}{% endblock %}">
+          <a href="{% url 'popular-category-dashboard-list' %}">
+            {% trans "Categories" context "Dashboard popular categories list" %}
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+</li>
+{% endif %}
+

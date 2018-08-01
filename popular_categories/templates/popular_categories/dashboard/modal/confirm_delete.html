@@ -1,0 +1,28 @@
+{% extends "dashboard/base_modal.html" %}
+
+{% load i18n %}
+
+{% block form_class %}{% endblock %}
+
+{% block action_url %}
+{% url 'popular-category-dashboard-delete' pk=popular_category.pk %}
+{% endblock %}
+
+{% block title %}
+{% blocktrans trimmed context "Modal remove popular category text" %}
+  Remove popular category <strong>{{ popular_category }}</strong>?
+{% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+  <div class="col s12">
+  {% blocktrans trimmed context "Modal remove popular category text" %}
+    Are you sure you want to remove popular category {{ popular_category }}?
+    <br> This category will no longer show up as a popular category.
+  {% endblocktrans %}
+  </div>
+{% endblock content %}
+
+{% block primary_action %}
+{% trans "Remove" context "Dashboard delete action" %}
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% load materializecss %}
+{% load staticfiles %}
+{% load utils %}
+
+{% block title %}
+  {% trans "Popular Categories" context "Dashboard popular categories list" %} - {{ block.super }}
+{% endblock %}
+
+{% block body_class %}body-customers{% endblock %}
+
+{% block menu_popular_categories_class %}active{% endblock %}
+
+{% block header_extra %}
+  {% if perms.popular_categories.edit %}
+    <div class="btn-fab-fixed">
+      <a href="{% url 'popular-category-dashboard-create' %}" class="btn-fab-default waves-effect waves-light" title="{% trans "Add popular category" context "Popular category list add button text" %}">
+        <svg data-src="{% static "dashboard/images/add.svg" %}" />
+      </a>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  <ul class="breadcrumbs">
+    <li class="visible-s">
+      {% trans "Popular Categories" context "Dashboard popular categories list" %}
+    </li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col s12 l9">
+      {% if popular_categories %}
+        <div class="card">
+          <div class="data-table-container">
+            <table class="bordered highlight data-table data-table-description">
+              <thead>
+                <tr>
+                  {% trans "Name" context "Dashboard popular categories list table header name" as label %}
+                  {% sorting_header 'name' label %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for popular_category in popular_categories %}
+                  <tr data-action-go="{% if perms.popular_categories.edit %}{% url 'popular-category-dashboard-detail' pk=popular_category.pk %}{% endif %}">
+                    <td>
+                      {{ popular_category }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% paginate popular_categories %}
+      {% else %}
+        {% if is_empty %}
+          {% include 'popular_categories/dashboard/zero_page.html' %}
+        {% else %}
+          <div class="col s12">
+            <div class="not-found">
+              <p class="grey-text">
+                {% trans "No popular categories found." context "Empty popular categories table message" %}
+              </p>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="col s12 l3" id="filters">
+      {% if not is_empty %}{% filters filter_set %}{% endif %}
+    </div>
+  </div>
+{% endblock %}
+
