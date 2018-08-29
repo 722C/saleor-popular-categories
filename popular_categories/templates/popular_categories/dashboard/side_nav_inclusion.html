@@ -6,7 +6,7 @@
     {% trans "Popular Categories" context "Dashboard popular categories list" %}
   </p>
   <ul>
-      {% if perms.popular_categories.vew %}
+      {% if perms.popular_categories.view %}
         <li class="{% block menu_popular_categories_class %}{% endblock %}">
           <a href="{% url 'popular-category-dashboard-list' %}">
             {% trans "Categories" context "Dashboard popular categories list" %}
