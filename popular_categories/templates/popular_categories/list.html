@@ -9,7 +9,7 @@
       <a href="{{ popular_category.category.get_absolute_url }}" class="link--clean">
         <div class="text-center">
           <div>
-              {% if popular_category.category.background_image %}<img class="img-responsive lazypreload lazyloaded" src="{{ popular_category.category.background_image.url }}" alt="{{ popular_category.category }}" />{% endif %}
+              {% if popular_category.category.background_image %}<img alt="" class="img-responsive lazypreload lazyloaded" src="{{ popular_category.category.background_image.url }}" alt="{{ popular_category.category }}" />{% endif %}
             <span class="product-list-item-name" title="{{ popular_category.category}}">{{ popular_category.category}}</span>
           </div>
         </div>
