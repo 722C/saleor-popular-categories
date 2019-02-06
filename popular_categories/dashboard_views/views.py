@@ -22,7 +22,7 @@ def popular_category_list(request):
     popular_category_filter = PopularCategoryFilter(
         request.GET, queryset=popular_categories)
     popular_categories = get_paginator_items(
-        popular_categories, settings.DASHBOARD_PAGINATE_BY, request.GET.get('page'))
+        popular_category_filter.qs, settings.DASHBOARD_PAGINATE_BY, request.GET.get('page'))
     # Call this so that cleaned_data exists on the filter_set
     popular_category_filter.form.is_valid()
     ctx = {
